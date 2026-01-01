@@ -8,7 +8,30 @@ function addMessage(text, sender) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function sendMessage() {
+async function sendMessage() {
+  const input = document.getElementById("user-input");
+  const userText = input.value.trim();
+  if (!userText) return;
+
+  addMessage(userText, "user");
+  input.value = "";
+
+  addMessage("Thinking...", "bot");
+
+  const response = await fetch("https://YOUR-WORKER-NAME.YOUR-NAME.workers.dev", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: userText })
+  });
+
+  const data = await response.json();
+
+  // remove "Thinking..."
+  chatBox.lastChild.remove();
+
+  addMessage(data.reply, "bot");
+}
+
   const input = document.getElementById("user-input");
   const userText = input.value.trim();
 
@@ -41,3 +64,4 @@ function getAIResponse(text) {
 
   return "I'm still learning. Soon I’ll be much smarter!";
 }
+
