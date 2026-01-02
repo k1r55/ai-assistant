@@ -1,3 +1,4 @@
+alert("JavaScript is working");
 const chatBox = document.getElementById("chat-box");
 
 function addMessage(text, sender) {
@@ -72,5 +73,6 @@ const response = await fetch(
     body: JSON.stringify({ message: userText })
   }
 );
+
 
 
