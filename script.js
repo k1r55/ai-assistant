@@ -64,4 +64,13 @@ function getAIResponse(text) {
 
   return "I'm still learning. Soon I’ll be much smarter!";
 }
+const response = await fetch(
+  "https://ai-assistant-brain.k1r55.workers.dev",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: userText })
+  }
+);
+
 
